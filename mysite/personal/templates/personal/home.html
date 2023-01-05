@@ -1,36 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
-    <h1>h1</h1>
-    <p>p</p>
-
-    <h2>
-        First Method of passing variable.
-    </h2>
-    
-    <p>
-        {{some_string}}
-    </p>
-    <p>
-        {{some_number}}
-    </p>
-    
-    <h2>
-        Second Method of passing variable.
-    </h2>
-    
-    <p>
-        {{some_string}}
-    </p>
-    <p>
-        {{some_number}}
-    </p>
-
-
-    {% for account in acocunts %}
-        {% include 'personal/snippets/body_snippet.html' with value=question %}
+    <h3>Registered Users:</h3>
+    {% for account in accounts %}
+       <p>{{account}}</p>
     {% endfor %}
-
-</div>
-{% endblock content %}  
+       
+{% endblock content %}
