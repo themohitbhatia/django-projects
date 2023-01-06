@@ -2,16 +2,19 @@
 
 {% block content %}
 
-    <h3>Registered Users:</h3>
-    {% for account in accounts %}
-       <p>{{account}}</p>
-    {% endfor %}
-
-<div>
-
-    {% for list_item in questions %}
-        {% include 'personal/snippets/body_snippet.html' with value=question %}
-    {% endfor %}
-
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Bhatia Blog</h1>
+    <p class="fs-5 text-muted">Quickly build an effective pricing table for your potential customers with this Bootstrap
+        example. It’s built with default Bootstrap components and utilities with little customization.</p>
 </div>
-{% endblock content %} 
+
+<div class="class">
+    <div class="d-flex flex-column">
+        <h3>Registered Users:</h3>
+        {% for account in accounts %}
+        <p>{{account}}</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
