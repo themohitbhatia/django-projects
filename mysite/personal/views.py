@@ -1,33 +1,36 @@
 from django.shortcuts import render
-from account.models import Account
+from operator import attrgetter
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-# Create your views here.
+from blog.views import get_blog_queryset
+from blog.models import BlogPost
 
-def home_screen_view(request):
-    context = {}
-    
-    accounts = Account.objects.all()
-    context['accounts'] = accounts
-    
-    return render(request, "personal/home.html", context)
-    
-    
-    
-    
-    # context['some_string'] = "This is some string that i am passing to the view."
-    # context['some_number'] = "4849161894 some number that i am passing to the view."
+BLOG_POSTS_PER_PAGE = 10
 
-    # context = { 
-    #     'some_string' : "This is some string that i am passing to the view.",
-    #     'some_number' : "4849161894 some number that i am passing to the view.",
-    # }
+def home_screen_view(request, *args, **kwargs):
+	
+	context = {}
 
-    # list_of_values = []
-    # list_of_values.append("First")
-    # list_of_values.append("Second")
-    # list_of_values.append("Third")
-    # list_of_values.append("Forth")
-    # context['list_of_values'] = list_of_values
+	# Search
+	query = ""
+	if request.GET:
+		query = request.GET.get('q', '')
+		context['query'] = str(query)
 
-    # questions = Question.objects.all()
-    # context['questions'] = questions
+	blog_posts = sorted(get_blog_queryset(query), key=attrgetter('date_updated'), reverse=True)
+	
+
+
+	# Pagination
+	page = request.GET.get('page', 1)
+	blog_posts_paginator = Paginator(blog_posts, BLOG_POSTS_PER_PAGE)
+	try:
+		blog_posts = blog_posts_paginator.page(page)
+	except PageNotAnInteger:
+		blog_posts = blog_posts_paginator.page(BLOG_POSTS_PER_PAGE)
+	except EmptyPage:
+		blog_posts = blog_posts_paginator.page(blog_posts_paginator.num_pages)
+
+	context['blog_posts'] = blog_posts
+
+	return render(request, "personal/home.html", context)
