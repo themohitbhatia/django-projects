@@ -1,8 +1,11 @@
-from django.contrib import admin
-from django.urls import path
-from .views import home_page
+from django.urls import path, include
+from api.views import CompanyViewSet, EmployeeViewSet
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'companies',CompanyViewSet)
+router.register(r'employees',EmployeeViewSet)
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("home/",home_page),
+    path("",include(router.urls)),
 ]
