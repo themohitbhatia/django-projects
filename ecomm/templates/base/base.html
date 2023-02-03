@@ -10,21 +10,22 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
     <!-- jQuery -->
-    <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-2.0.0.min.js" type="text/javascript"></script>
 
     <!-- Bootstrap4 files-->
-    <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="/media/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <link href="/media/css/bootstrap.css" rel="stylesheet" type="text/css" />
 
     <!-- Font awesome 5 -->
-    <link href="fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
+    <link href="/media/fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
 
     <!-- custom style -->
-    <link href="css/ui.css" rel="stylesheet" type="text/css" />
-    <link href="css/responsive.css" rel="stylesheet" />
+    <link href="/media/css/ui.css" rel="stylesheet" type="text/css" />
+    <link href="/media/css/responsive.css" rel="stylesheet" />
 
     <!-- custom javascript -->
-    <script src="js/script.js" type="text/javascript"></script>
+    <script src="/media/js/script.js" type="text/javascript"></script>
+    <script src="/media/js/script.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         /// some script
@@ -69,7 +70,10 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-4">
                         <div class="brand-wrap">
-                            <img class="logo" src="images/logo.png">
+                            <img class="logo" src="logo.png">
+                            {% comment %} <img class="logo" src="../public/static/images/logos/logo.png"> {% endcomment %}
+                            {% comment %} <img class="logo" src="D:/E/Django 2/ecomm/public/static/images/logos/logo.png"> {% endcomment %}
+                            {% comment %} <img class="logo" src="..images/logos/logo.png"> {% endcomment %}
                         </div> <!-- brand-wrap.// -->
                     </div>
                     <div class="col-lg-6 col-sm-12">
@@ -87,17 +91,17 @@
                     <div class="col-lg-4 col-sm-6 col-8">
                         <div class="widgets-wrap float-md-right">
                             <div class="widget-header  mr-3">
-                                <a href="#" class="icon icon-sm rounded-circle border"><i
+                                <a href="{% url 'cart' %}" class="icon icon-sm rounded-circle border"><i
                                         class="fa fa-shopping-cart"></i></a>
-                                <span class="badge badge-pill badge-danger notify">0</span>
+                                <span class="badge badge-pill badge-danger notify">{{request.user.profile.get_cart_count}}</span>
                             </div>
                             <div class="widget-header icontext">
                                 <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                                 <div class="text">
                                     <span class="text-muted">Welcome!</span>
                                     <div>
-                                        <a href="#">Sign in</a> |
-                                        <a href="#"> Register</a>
+                                        <a href="http://127.0.0.1:8000/accounts/login/">Sign in</a> |
+                                        <a href="http://127.0.0.1:8000/accounts/register/"> Register</a>
                                     </div>
                                 </div>
                             </div>
